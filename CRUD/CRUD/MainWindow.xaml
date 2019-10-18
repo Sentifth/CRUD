@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CRUD"
         mc:Ignorable="d"
-        Title="AlumnosDB"  Height="525" Width="900"  WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+        Title="AlumnosDB"  Height="560" Width="900"  WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Window.Resources>
         <Style TargetType="TextBlock">
             <Setter Property="FontSize" Value="20"/>
@@ -19,46 +19,88 @@
         </Style>
     </Window.Resources>
     <Window.Background>
-        <ImageBrush ImageSource="mclaren/image.jpg" Stretch="Uniform"/>
+        <ImageBrush ImageSource="mclaren/image.jpg" Stretch="Uniform" Opacity="0.5"/>
     </Window.Background>
     <DockPanel Name="dockMain" VerticalAlignment="Stretch" HorizontalAlignment="Center" LastChildFill="False">
         <StackPanel>
-            <Label Content="McLaren" HorizontalAlignment="Center" FontSize="36" FontWeight="Bold"></Label>
+            <Label Content="McLaren" HorizontalAlignment="Center" FontSize="48" FontWeight="ExtraBlack" Foreground="White" FontFamily="Segoe Print" FontStyle="Italic" TextOptions.TextFormattingMode="Display" Background="{x:Null}"/>
             <WrapPanel>
-                <TextBlock Text="Id Alumno : "/>
-                <TextBox Name="txtId" />
+                <TextBlock Text="Numero de serie : " Foreground="White" Background="Black"/>
+                <TextBox Name="txtSerie" >
+                    <TextBox.Background>
+                        <SolidColorBrush Color="White" Opacity="0.5"/>
+                    </TextBox.Background>
+                    <TextBox.Foreground>
+                        <SolidColorBrush Color="Black"/>
+                    </TextBox.Foreground>
+                </TextBox>
             </WrapPanel>
             <WrapPanel>
-                <TextBlock Text="Nombre : "/>
-                <TextBox Name="txtNombre" />
+                <TextBlock Text="Cliente : " Foreground="White" Background="Black"/>
+                <TextBox Name="txtCliente" >
+                    <TextBox.Background>
+                        <SolidColorBrush Color="White" Opacity="0.5"/>
+                    </TextBox.Background>
+                    <TextBox.Foreground>
+                        <SolidColorBrush Color="Black"/>
+                    </TextBox.Foreground>
+                </TextBox>
             </WrapPanel>
             <WrapPanel>
-                <TextBlock Text="Genero : "/>
-                <ComboBox FontSize="20" Name="cbGenero" Width="250" Margin="10">
+                <TextBlock Text="Modelo : " Foreground="White" Background="Black"/>
+                <ComboBox FontSize="20" Name="cbModelo" Width="250" Margin="10">
+                    <ComboBox.Background>
+                        <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                            <GradientStop Color="#FFF0F0F0" Offset="0"/>
+                            <GradientStop Color="#FFE5E5E5" Offset="0.5"/>
+                        </LinearGradientBrush>
+                    </ComboBox.Background>
+                    <ComboBox.Foreground>
+                        <SolidColorBrush Color="Black"/>
+                    </ComboBox.Foreground>
                     <ComboBoxItem Content="Selecciona Genero" Selector.IsSelected="True" />
-                    <ComboBoxItem Content="Hombre" />
-                    <ComboBoxItem Content="Mujer" />
+                    <ComboBoxItem Content="McLaren 540C" />
+                    <ComboBoxItem Content="McLaren 570GT" />
+                    <ComboBoxItem Content="McLaren 570S Spider" />
+                    <ComboBoxItem Content="McLaren 675LT Coupe" />
+                    <ComboBoxItem Content="McLaren 675LT Spider" />
+                    <ComboBoxItem Content="McLaren 720S" />
+                    <ComboBoxItem Content="McLaren Senna" />
                 </ComboBox>
             </WrapPanel>
             <WrapPanel>
-                <TextBlock Text="Telefono : "/>
-                <TextBox Name="txtTelefono" />
+                <TextBlock Text="Año : " Foreground="White" Background="Black"/>
+                <TextBox Name="txtAño" >
+                    <TextBox.Background>
+                        <SolidColorBrush Color="White" Opacity="0.5"/>
+                    </TextBox.Background>
+                    <TextBox.Foreground>
+                        <SolidColorBrush Color="Black"/>
+                    </TextBox.Foreground>
+                </TextBox>
             </WrapPanel>
             <WrapPanel>
-                <TextBlock Text="Dirección : "/>
-                <TextBox Name="txtDireccion" TextWrapping="Wrap" AcceptsReturn="True" Height="75" />
+                <TextBlock Text="Precio : " Foreground="White" Background="Black"/>
+                <TextBox Name="txtPrecio" TextWrapping="Wrap" AcceptsReturn="True" Height="30" >
+                    <TextBox.Background>
+                        <SolidColorBrush Color="White" Opacity="0.5"/>
+                    </TextBox.Background>
+                    <TextBox.Foreground>
+                        <SolidColorBrush Color="Black"/>
+                    </TextBox.Foreground>
+                </TextBox>
             </WrapPanel>
             <WrapPanel Margin="0" HorizontalAlignment="Center" Height="59">
-                <Button Name="btnNuevo" Content="Nuevo" FontSize="25" Width="120" Margin="5" Click="BtnNuevo_Click" />
+                <Button Name="btnNuevo" Content="Nueva venta" FontSize="25" Width="144" Margin="5" Click="BtnNuevo_Click" />
                 <Button Name="btnEditar" Content="Editar" FontSize="25" Width="120" Margin="5" Click="BtnEditar_Click" />
-                <Button Name="btnEliminar" Content="Eliminar" FontSize="25" Width="120" Margin="5" Click="BtnEliminar_Click" />
+                <Button Name="btnEliminar" Content="Eliminar venta" FontSize="25" Width="173" Margin="5" Click="BtnEliminar_Click" />
                 <Button Name="btnCancelar" Content="Cancelar" FontSize="25" Width="120" Margin="5" Click="BtnCancelar_Click" />
                 <Button Name="btnSalir" Content="Salir" FontSize="25" Width="120" Margin="5" Background="#400000" Foreground="Bisque" Click="BtnSalir_Click" />
             </WrapPanel>
-            <Label Content="No encontre Registros." Name="lbContenido" HorizontalAlignment="Center" FontSize="16" FontWeight="Bold" Foreground="#FFE10000"></Label>
-            <WrapPanel Margin="20" HorizontalAlignment="Center">
-                <DataGrid AutoGenerateColumns="True" Name="gvDatos" SelectionMode="Single" FontSize="15" Padding="5" Background="Black" />
-            </WrapPanel>
+            <Label Content="No se ha encontrado" Name="lbContenido" HorizontalAlignment="Center" FontSize="16" FontWeight="Bold" Foreground="Yellow"></Label>
+            <Grid Margin="20" HorizontalAlignment="Center">
+                <DataGrid AutoGenerateColumns="True" x:Name="gvDatos" SelectionMode="Single" FontSize="15" Padding="5" Background="Black" RenderTransformOrigin="0.548,-0.652" Margin="0,-24,0,24" />
+            </Grid>
         </StackPanel>
     </DockPanel>
 </Window>

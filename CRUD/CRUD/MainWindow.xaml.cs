@@ -29,7 +29,7 @@ namespace CRUD
             InitializeComponent();
             //Conectamos la base de datos a nuestro archivo Access
             con = new OleDbConnection();
-            con.ConnectionString = "Provider=Microsoft.Jet.Oledb.4.0; Data Source=" + AppDomain.CurrentDomain.BaseDirectory + "\\AlumnosDB.mdb";
+            con.ConnectionString = "Provider=Microsoft.Jet.Oledb.4.0; Data Source=" + AppDomain.CurrentDomain.BaseDirectory + "\\McLarenCRUD.mdb";
             MostrarDatos();
         }
         //Mostramos los registros de la tabla
@@ -39,7 +39,7 @@ namespace CRUD
             if (con.State != ConnectionState.Open)
                 con.Open();
             cmd.Connection = con;
-            cmd.CommandText = "select * from Progra";
+            cmd.CommandText = "select * from ventas";
             OleDbDataAdapter da = new OleDbDataAdapter(cmd);
             dt = new DataTable();
             da.Fill(dt);
@@ -60,13 +60,13 @@ namespace CRUD
         //Limpiamos todos los campos
         private void LimpiaTodo()
         {
-            txtId.Text = "";
-            txtNombre.Text = "";
-            cbGenero.SelectedIndex = 0;
-            txtTelefono.Text = "";
-            txtDireccion.Text = "";
+            txtSerie.Text = "";
+            txtCliente.Text = "";
+            cbModelo.SelectedIndex = 0;
+            txtAño.Text = "";
+            txtPrecio.Text = "";
             btnNuevo.Content = "Nuevo";
-            txtId.IsEnabled = true;
+            txtSerie.IsEnabled = true;
         }
         private void BtnNuevo_Click(object sender, RoutedEventArgs e)
         {
@@ -75,38 +75,38 @@ namespace CRUD
                 con.Open();
             cmd.Connection = con;
 
-            if (txtId.Text != "")
+            if (txtSerie.Text != "")
             {
-                if (txtId.IsEnabled == true)
+                if (txtSerie.IsEnabled == true)
                 {
-                    if (cbGenero.Text != "Selecciona Genero")
+                    if (cbModelo.Text != "Selecciona el Modelo")
                     {
-                        cmd.CommandText = "insert into Progra(Id,Nombre,Genero,Telefono,Direccion) " +
-                            "Values(" + txtId.Text + ",'" + txtNombre.Text + "','" + cbGenero.Text + "'," + txtTelefono.Text + ",'" + txtDireccion.Text + "')";
+                        cmd.CommandText = "insert into ventas(Serie,Cliente,Modelo,Año,Precio) " +
+                            "Values(" + txtSerie.Text + ",'" + txtCliente.Text + "','" + cbModelo.Text + "'," + txtAño.Text + ",'" + txtPrecio.Text + "')";
                         cmd.ExecuteNonQuery();
                         MostrarDatos();
-                        MessageBox.Show("Alumno agregado correctamente...");
+                        MessageBox.Show("Venta de auto agregada correctamente...");
                         LimpiaTodo();
 
                     }
                     else
                     {
-                        MessageBox.Show("Favor de seleccionar el genero....");
+                        MessageBox.Show("Favor de seleccionar el Modelo....");
                     }
                 }
                 else
                 {
-                    cmd.CommandText = "update Progra set Nombre='" + txtNombre.Text + "',Genero='" + cbGenero.Text + "',Telefono=" + txtTelefono.Text
-                        + ",Direccion='" + txtDireccion.Text + "' where Id=" + txtId.Text;
+                    cmd.CommandText = "update Progra set Cliente='" + txtCliente.Text + "',Modelo='" + cbModelo.Text + "',Año=" + txtAño.Text
+                        + ",Precio='" + txtPrecio.Text + "' where Serie=" + txtSerie.Text;
                     cmd.ExecuteNonQuery();
                     MostrarDatos();
-                    MessageBox.Show("Datos del alumno Actualizados...");
+                    MessageBox.Show("Datos de la venta actualizados...");
                     LimpiaTodo();
                 }
             }
             else
             {
-                MessageBox.Show("Favor de poner el ID de un Alumno.......");
+                MessageBox.Show("Favor de poner la serie del un automovil.......");
             }
         }
 
@@ -115,17 +115,17 @@ namespace CRUD
             if (gvDatos.SelectedItems.Count > 0)
             {
                 DataRowView row = (DataRowView)gvDatos.SelectedItems[0];
-                txtId.Text = row["Id"].ToString();
-                txtNombre.Text = row["Nombre"].ToString();
-                cbGenero.Text = row["Genero"].ToString();
-                txtTelefono.Text = row["Telefono"].ToString();
-                txtDireccion.Text = row["Direccion"].ToString();
-                txtId.IsEnabled = false;
+                txtSerie.Text = row["Serie"].ToString();
+                txtCliente.Text = row["Cliente"].ToString();
+                cbModelo.Text = row["Modelo"].ToString();
+                txtAño.Text = row["Año"].ToString();
+                txtPrecio.Text = row["Precio"].ToString();
+                txtSerie.IsEnabled = false;
                 btnNuevo.Content = "Actualizar";
             }
             else
             {
-                MessageBox.Show("Favor de seleccionar un alumno...");
+                MessageBox.Show("Favor de seleccionar una venta...");
             }
         }
 
@@ -138,15 +138,15 @@ namespace CRUD
                 if (con.State != ConnectionState.Open)
                     con.Open();
                 cmd.Connection = con;
-                cmd.CommandText = "delete from Progra where Id=" + row["Id"].ToString();
+                cmd.CommandText = "delete from ventas where Serie=" + row["Serie"].ToString();
                 cmd.ExecuteNonQuery();
                 MostrarDatos();
-                MessageBox.Show("Alumno eliminado correctamente...");
+                MessageBox.Show("Venta eliminada correctamente...");
                 LimpiaTodo();
             }
             else
             {
-                MessageBox.Show("Favor de seleccionar un alumno...");
+                MessageBox.Show("Favor de seleccionar una venta...");
             }
         }
 
